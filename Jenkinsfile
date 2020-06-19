@@ -2,19 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Get dependencies') {
             steps {
-                echo 'Building..'
+                sh 'npm install'
             }
         }
-        stage('Test') {
+        stage('Convert typescript to javascript') {
             steps {
-                echo 'Testing..'
+                sh 'tsc --build tsconfig.json'
             }
         }
-        stage('Deploy') {
+        stage('Run the server.js file') {
             steps {
-                echo 'Deploying....'
+                sh 'npm run start'
             }
         }
     }
